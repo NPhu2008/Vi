@@ -1,13 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy birthday PTViiiiii</title>
+    <title>Chúc Mừng Sinh Nhật!</title>
+    <style></style>
     <link rel="stylesheet" href="Vi.css">
 </head>
 <body>
+
+    <!-- Chiếc bánh sinh nhật làm nút bấm -->
+    <div id="cake-container">
+        <svg class="cake-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Đáy bánh / Thân bánh -->
+            <path d="M4 16H20V20C20 21.1046 19.1046 22 18 22H6C4.89543 22 4 21.1046 4 20V16Z" fill="#FF69B4"/>
+            <path d="M3 13H21V16H3V13Z" fill="#FFB6C1"/>
+            <!-- Lớp kem phủ trên -->
+            <path d="M3 11C3 11 5 13 7 11C9 9 11 13 12 13C13 13 15 9 17 11C19 13 21 11 21 11V13H3V11Z" fill="#FFF"/>
+            <!-- Nến sinh nhật -->
+            <path d="M11 6H13V11H11V6Z" fill="#3B82F6"/>
+            <!-- Ngọn lửa nến -->
+            <path d="M12 2C12 2 10 4 10 5.5C10 6.60457 10.8954 7.5 12 7.5C13.1046 7.5 14 6.60457 14 5.5C14 4 12 2 12 2Z" fill="#F59E0B"/>
+        </svg>
+        <div class="cake-text">✨ Bấm vào bánh để mở quà! ✨</div>
+    </div>
+
     <canvas id="canvas1"></canvas>
+
     <script src="Vi.js"></script>
 </body>
 </html>
