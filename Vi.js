@@ -6,7 +6,7 @@ canvas.height=450;
 
 const image= new Image();
 
-image.src='./tuat.jpg';
+image.src='./img/tuat.jpg';
 let x=0;
 let y=0;
 
