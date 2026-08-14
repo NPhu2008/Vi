@@ -6,19 +6,19 @@ canvas.height=450;
 
 const image= new Image();
 
-image.src='./img/tuat.jpg';
+image.src='tuat.jpg';
 let x=0;
 let y=0;
 
-let gap=2;
+let gap=1;
 let size=1;
 
 class point {
         constructor(x,y,r,g,b,a){
             this.v=0.08;
             this.v2=5;
-            this.x = Math.random()*canvas.width;
-            this.y = Math.random()*canvas.height;
+            this.x = canvas.width / 2;
+            this.y = canvas.height / 2;
             this.r=r;
             this.g=g;
             this.b=b;
@@ -26,8 +26,8 @@ class point {
             this.X=x;
             this.Y=y;
             let alpha=Math.random()*Math.PI*2;
-            this.vx=Math.cos(alpha)*10;
-            this.vy=Math.sin(alpha)*10;
+            this.vx=Math.cos(alpha);
+            this.vy=Math.sin(alpha);
         }
         draw(){
             ctx.beginPath();
@@ -37,10 +37,18 @@ class point {
             ctx.closePath();
         }
         update(){
-            this.vx=(this.X-this.x)*0.05;
-            this.vy=(this.Y-this.y)*0.05;
+            let ax=(this.X-this.x)*0.05;
+            let ay=(this.Y-this.y)*0.85;
+            this.vx=this.vx+ax;
+            this.vy=this.vy+ay;
             this.x+=this.vx;
             this.y+=this.vy;
+            if(Math.abs(this.X-this.x) < 0.5){
+                this.x=this.X;
+            }
+            if(Math.abs(this.Y-this.y)<0.5){
+                this.y=this.Y;
+            }
         }
         updateBreak(){
 
