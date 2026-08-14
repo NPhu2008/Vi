@@ -11,6 +11,69 @@ const canvas = document.getElementById("canvas1");
         let size = 1;
         let pointArray = [];
         let isStarted = false;
+        let fireWorkBreak=false;
+        class fireWork {
+            constructor(y, r, g, b, a) {
+                let v = 2; // Tăng tốc độ để vệt đuôi bay dài và mượt hơn
+                this.x = canvas.width / 2;
+                this.y = y;
+                this.r = r;
+                this.g = g;
+                this.b = b;
+                this.a = a;
+                this.v = v;
+                this.history = []; // Mảng lưu các vị trí trước đó để làm vệt đuôi
+            }
+
+            draw() {
+                ctx.save();
+
+                // 1. Vẽ vệt đuôi pháo hoa (các hạt mờ dần phía sau)
+                for (let i = 0; i < this.history.length; i++) {
+                    let point = this.history[i];
+                    // Tính độ mờ giảm dần từ đuôi lên đầu
+                    let alpha = (i / this.history.length) * 0.5; 
+                    ctx.beginPath();
+                    ctx.fillStyle = `rgba(${this.r}, ${this.g}, ${this.b}, ${alpha})`;
+                    ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.closePath();
+                }
+
+                // 2. Vẽ đầu viên pháo hoa chính rực sáng
+                ctx.shadowBlur = 20;
+                ctx.shadowColor = `rgba(${this.r}, ${this.g}, ${this.b}, 1)`;
+                ctx.beginPath();
+                ctx.fillStyle = `rgba(${this.r}, ${this.g}, ${this.b}, ${this.a})`;
+                ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.closePath();
+
+                ctx.restore();
+            }
+
+            update() {
+                if (this.y > canvas.height / 2) {
+                    // Lưu lại vị trí hiện tại vào lịch sử đuôi
+                    this.history.push({ x: this.x, y: this.y });
+                    
+                    // Giới hạn chiều dài của vệt đuôi (tối đa 15 điểm)
+                    if (this.history.length > 15) {
+                        this.history.shift();
+                    }
+                    this.v-=0.005;
+                    this.y -= this.v;
+                } else {
+                    setTimeout(() => {
+                        
+                        fireWorkBreak = true;
+                    }, 100); //
+                }
+            }
+        }
+
+        // Khởi tạo pháo hoa với màu Xanh Cyan Neon (0, 240, 255) cực chất
+        const fireWork1 = new fireWork(canvas.height, 0, 240, 255, 1);
 
         class point {
             constructor(x, y, r, g, b, a, targetX, targetY) {
@@ -24,7 +87,7 @@ const canvas = document.getElementById("canvas1");
                 this.Y = targetY;
                 
                 let alpha = Math.random() * Math.PI * 2;
-                let v0 = Math.random() * 35 + 10;
+                let v0 = Math.random() * 15 + 10;
                 this.vx = Math.cos(alpha) * v0;
                 this.vy = Math.sin(alpha) * v0;
                 
@@ -78,13 +141,10 @@ const canvas = document.getElementById("canvas1");
             
             let imgWidth = image.width * ratio;
             let imgHeight = image.height * ratio;
-            let imgX = (canvas.width - imgWidth) / 2;
-            let imgY = (canvas.height - imgHeight) / 2;
 
-            ctx.drawImage(image, imgX, imgY, imgWidth, imgHeight);
+            ctx.drawImage(image, 0,0, imgWidth, imgHeight);
             const dataImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
             for (let y = 0; y < canvas.height; y += gap) {
                 for (let x = 0; x < canvas.width; x += gap) {
                     const index = (y * canvas.width + x) * 4;
@@ -113,9 +173,20 @@ const canvas = document.getElementById("canvas1");
             // Bắt đầu chạy vòng lặp animation pháo hoa nổ thành ảnh
             function animation() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                for (let i = 0; i < pointArray.length; i++) {
-                    pointArray[i].update();
-                    pointArray[i].draw();
+                if(!fireWorkBreak){
+
+                    fireWork1.update();
+                    fireWork1.draw();
+                }
+                else{
+
+                    for (let i = 0; i < pointArray.length; i++) {
+                       
+    
+                            pointArray[i].update();
+                            pointArray[i].draw();
+                        
+                    }
                 }
                 requestAnimationFrame(animation);
             }
