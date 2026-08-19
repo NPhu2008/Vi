@@ -17,11 +17,10 @@ const imageInput = document.getElementById("image-input");
 const uploadOverlay = document.getElementById("upload-overlay");
 
 
-// Cấu hình pháo hoa xuất phát từ phía bên trái
 class fireWork {
     constructor(y, r, g, b, a) {
         let v = 2;
-        this.x = canvas.width/2; // Bay lên từ vùng bên trái
+        this.x = canvas.width/2; 
         this.y = y;
         this.r = r;
         this.g = g;
@@ -130,7 +129,7 @@ class point {
     }
 }
 
-// Lấy dữ liệu ảnh và đặt vị trí ở 1/4 bên trái canvas
+
 image.addEventListener("load", () => {
     let hRatio = (canvas.width * 0.45) / image.width;
     let vRatio = canvas.height / image.height;
@@ -162,11 +161,8 @@ image.addEventListener("load", () => {
         }
     }
 });
-
-// Hàm gõ chữ tự động
-// Hàm gõ chữ tự động và hiện nút bấm
 function startTypingEffect() {
-    const text = "Happy Birthday Phạm Thùy Vy! ✨\nchúc Vi thối tuổi mới luôn xinh đẹp,hạnh phúc, thành công và mạnh mẽ hơn,không còn phải khóc nữa nhossss";
+    const text = "Happy Birthday Phạm Thùy Vy! ✨\nnphu chúc Vi thối tuổi mới luôn xinh đẹp,hạnh phúc, thành công và mạnh mẽ hơn,không còn phải khóc nữa nhossss";
     const targetElement = document.getElementById("typing-text");
     const surpriseBtn = document.getElementById("submit");
     let index = 0;
