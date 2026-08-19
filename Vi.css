@@ -1,59 +1,153 @@
-  body {
-            margin: 0;
-            background-color: #0f172a; /* Nền tối để hiệu ứng pháo hoa nổi bật */
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+body {
+    margin: 0;
+    background-color: #0f172a;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-        canvas {
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-        }
+canvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
 
-        /* --- CSS CHO CHIẾC BÁNH SINH NHẬT --- */
-        #cake-container {
-            position: relative;
-            z-index: 10;
-            cursor: pointer;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
+/* --- CSS BÁNH SINH NHẬT --- */
+#cake-container {
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
 
-        #cake-container:hover {
-            transform: scale(1.05);
-        }
+#cake-container:hover {
+    transform: scale(1.05);
+}
 
-        .cake-svg {
-            width: 180px;
-            height: 180px;
-            filter: drop-shadow(0 10px 20px rgba(255, 105, 180, 0.4));
-        }
+.cake-svg {
+    width: 180px;
+    height: 180px;
+    filter: drop-shadow(0 10px 20px rgba(255, 105, 180, 0.4));
+}
 
-        .cake-text {
-            color: #fff;
-            margin-top: 15px;
-            font-size: 18px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            animation: pulse 1.5s infinite alternate;
-        }
+.cake-text {
+    color: #fff;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    animation: pulse 1.5s infinite alternate;
+}
 
-        @keyframes pulse {
-            0% { opacity: 0.7; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.05); }
-        }
+@keyframes pulse {
+    0% { opacity: 0.7; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.05); }
+}
 
-        /* Hiệu ứng ẩn bánh khi click */
-        .hidden {
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
-        }
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+/* --- CSS DÒNG CHỮ CHẠY BÊN PHẢI --- */
+#typing-container {
+    position: absolute;
+    right: 8%;
+    top: 45%;
+    transform: translateY(-50%);
+    z-index: 5;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #00e5ff;
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.7), 0 0 20px rgba(255, 105, 180, 0.5);
+    max-width: 40%;
+    line-height: 1.4;
+    pointer-events: none;
+}
+
+.cursor {
+    display: inline-block;
+    color: #ff4081;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+/* --- CSS DÒNG CHỮ & NÚT BẤM BÊN PHẢI --- */
+#typing-container {
+    position: absolute;
+    right: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    max-width: 40%;
+    pointer-events: auto; /* Cho phép click vào button */
+}
+
+#typing-text {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #00e5ff;
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.7), 0 0 20px rgba(255, 105, 180, 0.5);
+    line-height: 1.4;
+}
+
+.cursor {
+    font-size: 2.2rem;
+    display: inline-block;
+    color: #ff4081;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Nút bấm ẩn */
+.hidden-btn {
+    opacity: 0;
+    transform: translateY(15px);
+    pointer-events: none;
+    transition: all 0.6s ease;
+}
+
+/* Style cho Nút bấm khi hiện lên */
+#submit {
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(45deg, #ff4081, #7c4dff);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 64, 129, 0.4);
+    outline: none;
+}
+
+#submit:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 64, 129, 0.7);
+}
+
+/* Class kích hoạt hiện nút */
+.show-btn {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+}
