@@ -178,14 +178,14 @@ function animation(){
         }
         if(step==1){
             
-            vx=(positionBegin[i]-Begin[i])*0.005;
-            vy=(positionBegin[i+1]-Begin[i+1])*0.005;
-            vz=(positionBegin[i+2]-Begin[i+2])*0.005;
+            vx=(positionBegin[i]-Begin[i])*0.005*Math.random();
+            vy=(positionBegin[i+1]-Begin[i+1])*0.005*Math.random();
+            vz=(positionBegin[i+2]-Begin[i+2])*0.005*Math.random();
         }
         if(step==0){
-            vx=(position[i]-Begin[i])*0.01;
-            vy=(position[i+1]-Begin[i+1])*0.01;
-            vz=(position[i+2]-Begin[i+2])*0.01;
+            vx=(position[i]-Begin[i])*0.005*Math.random();
+            vy=(position[i+1]-Begin[i+1])*0.005*Math.random();
+            vz=(position[i+2]-Begin[i+2])*0.005*Math.random();
         }
         if(step==-1){
          
